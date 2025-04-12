@@ -2,7 +2,7 @@
 
 A modern, responsive web application for event booking with interactive calendar integration, multi-step form validation, and dynamic UI components.
 
-🚀 To visit the live website, click here: [Event Booking](https://event-booking-app-bice.vercel.app/)
+🚀 To visit the live website, click here: [Event Booking UI](https://event-booking-app-chanchal-bag-s-projects.vercel.app/)
 
 ## Overview
 
