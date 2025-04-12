@@ -2,6 +2,8 @@
 
 A modern, responsive web application for event booking with interactive calendar integration, multi-step form validation, and dynamic UI components.
 
+🚀 To visit the live website, click here: [Event Booking](https://event-booking-app-bice.vercel.app/)
+
 ## Overview
 
 The Event Booking System is designed for event organizers and venue managers who need a streamlined solution for managing bookings and events. This application addresses the challenge of coordinating event schedules, collecting necessary information from attendees, and providing a visually appealing interface for both users and administrators.
@@ -203,8 +205,8 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 For questions or support, please contact:
 - Email: support@eventbookingsystem.com
-- GitHub: [your-username](https://github.com/your-username)
+- GitHub: [Chanchal Bag](https://github.com/chanchal010)
 
 ---
 
-Made with ❤️ by Your Name
+Made with ❤️ by Chanchal Bag
