@@ -1,0 +1,144 @@
+.card {
+  background-color: #fff;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  height: 100%;
+}
+
+.card-shadow {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.card-bordered {
+  border: 1px solid #e5e7eb;
+}
+
+.card-header {
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid #e5e7eb;
+  font-weight: 600;
+}
+
+.card-body {
+  padding: 1.5rem;
+}
+
+.card-footer {
+  padding: 1.25rem 1.5rem;
+  border-top: 1px solid #e5e7eb;
+  background-color: #f9fafb;
+}
+
+/* Card variants */
+.card-primary {
+  border-top: 4px solid #3b82f6;
+}
+
+.card-secondary {
+  border-top: 4px solid #6b7280;
+}
+
+.card-info {
+  border-top: 4px solid #0ea5e9;
+}
+
+.card-success {
+  border-top: 4px solid #10b981;
+}
+
+.card-warning {
+  border-top: 4px solid #f59e0b;
+}
+
+.card-danger {
+  border-top: 4px solid #ef4444;
+}
+
+/* Card with image */
+.card-img-top {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+}
+
+.card-img-overlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1.5rem;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.6));
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  color: white;
+}
+
+.card-img-overlay .card-title,
+.card-img-overlay .card-subtitle {
+  color: white;
+}
+
+/* Horizontal card */
+.card-horizontal {
+  flex-direction: row;
+}
+
+.card-horizontal .card-img {
+  width: 33%;
+  object-fit: cover;
+}
+
+.card-horizontal .card-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+/* Card sizes */
+.card-sm {
+  max-width: 300px;
+}
+
+.card-md {
+  max-width: 500px;
+}
+
+.card-lg {
+  max-width: 700px;
+}
+
+/* Stack of cards */
+.card-stack {
+  position: relative;
+}
+
+.card-stack .card {
+  position: absolute;
+  width: 100%;
+  transition: all 0.3s ease;
+}
+
+.card-stack .card:nth-child(1) {
+  transform: translateY(0) scale(1);
+  z-index: 3;
+}
+
+.card-stack .card:nth-child(2) {
+  transform: translateY(15px) scale(0.98);
+  z-index: 2;
+}
+
+.card-stack .card:nth-child(3) {
+  transform: translateY(30px) scale(0.96);
+  z-index: 1;
+}

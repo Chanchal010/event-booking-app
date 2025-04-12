@@ -1,0 +1,618 @@
+.calendar-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.date-picker-container {
+  width: 100%;
+  border-radius: var(--border-radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: all var(--transition-normal);
+}
+
+.date-picker-container:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-4px);
+}
+
+/* Custom styling for react-datepicker */
+.custom-calendar {
+  width: 100% !important;
+  max-width: 100% !important;
+  border: none !important;
+  font-family: var(--font-primary) !important;
+  background-color: var(--background-light) !important;
+}
+
+.react-datepicker {
+  width: 100% !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: var(--border-radius-lg) !important;
+  overflow: hidden !important;
+  box-shadow: var(--shadow) !important;
+  font-family: var(--font-primary) !important;
+  background-color: var(--background-light) !important;
+}
+
+.react-datepicker__month-container {
+  width: 100% !important;
+  background-color: var(--background-light) !important;
+}
+
+.react-datepicker__header {
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-light)) !important;
+  border-bottom: none !important;
+  border-top-left-radius: var(--border-radius-md) !important;
+  border-top-right-radius: var(--border-radius-md) !important;
+  padding: 1.25rem 1rem 0.75rem !important;
+  position: relative !important;
+}
+
+.react-datepicker__day-names, 
+.react-datepicker__week {
+  display: flex !important;
+  justify-content: space-around !important;
+}
+
+.react-datepicker__day-name, 
+.react-datepicker__day {
+  width: 2.5rem !important;
+  line-height: 2.5rem !important;
+  margin: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.react-datepicker__day-name {
+  color: white !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  font-size: 0.75rem !important;
+}
+
+.react-datepicker__current-month {
+  color: white !important;
+  font-weight: 600 !important;
+  font-size: 1.125rem !important;
+  margin-bottom: 1rem !important;
+  text-transform: uppercase !important;
+  letter-spacing: 1px !important;
+}
+
+.react-datepicker__navigation {
+  top: 1.25rem !important;
+}
+
+.react-datepicker__navigation--previous {
+  left: 1.25rem !important;
+}
+
+.react-datepicker__navigation--next {
+  right: 1.25rem !important;
+}
+
+.react-datepicker__navigation-icon::before {
+  border-color: white !important;
+  border-width: 2px 2px 0 0 !important;
+  height: 10px !important;
+  width: 10px !important;
+  transition: all var(--transition-fast) !important;
+}
+
+.react-datepicker__navigation:hover .react-datepicker__navigation-icon::before {
+  border-color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.react-datepicker__day {
+  color: var(--text-color) !important;
+  transition: all var(--transition-fast) !important;
+  position: relative !important;
+  font-weight: 500 !important;
+}
+
+.react-datepicker__day--outside-month {
+  color: var(--text-light) !important;
+  opacity: 0.5 !important;
+}
+
+.react-datepicker__day--disabled {
+  color: var(--text-lighter) !important;
+  opacity: 0.3 !important;
+  cursor: not-allowed !important;
+}
+
+.react-datepicker__day--selected {
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-light)) !important;
+  color: white !important;
+  font-weight: 600 !important;
+  border-radius: 50% !important;
+  transform: scale(1.15) !important;
+  box-shadow: 0 4px 10px rgba(99, 102, 241, 0.4) !important;
+}
+
+.react-datepicker__day--keyboard-selected {
+  background-color: rgba(79, 70, 229, 0.1) !important;
+  color: var(--primary-color) !important;
+  border-radius: 50% !important;
+}
+
+.react-datepicker__day:hover:not(.react-datepicker__day--disabled):not(.react-datepicker__day--selected) {
+  background-color: rgba(79, 70, 229, 0.1) !important;
+  border-radius: 50% !important;
+  transform: scale(1.1) !important;
+}
+
+.calendar-day {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all var(--transition-fast);
+  z-index: 1;
+}
+
+.event-indicator {
+  position: absolute;
+  bottom: 3px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 6px;
+  height: 6px;
+  background-color: var(--secondary-color);
+  box-shadow: 0 0 0 2px var(--background-light);
+  border-radius: 50%;
+  z-index: 2;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 4px rgba(245, 158, 11, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(245, 158, 11, 0);
+  }
+}
+
+.booked-date {
+  font-weight: 700;
+  color: var(--primary-color) !important;
+}
+
+/* Calendar info section */
+.calendar-info {
+  padding: 1.5rem;
+  background-color: var(--background-light);
+  border-radius: var(--border-radius-lg);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow);
+  transition: all var(--transition-normal);
+  animation: fadeIn 0.5s ease-out;
+}
+
+.calendar-info:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.calendar-legend {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  opacity: 0.9;
+  transition: opacity var(--transition-fast);
+}
+
+.legend-item:hover {
+  opacity: 1;
+}
+
+.legend-color {
+  display: block;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  transition: transform var(--transition-fast);
+}
+
+.legend-item:hover .legend-color {
+  transform: scale(1.2);
+}
+
+.legend-color.available {
+  background: linear-gradient(135deg, #eef2ff, #e0e7ff);
+  border: 1px solid var(--primary-light);
+}
+
+.legend-color.booked {
+  background: linear-gradient(135deg, #fff7ed, #ffedd5);
+  border: 1px solid var(--secondary-color);
+}
+
+.date-events-preview {
+  background: linear-gradient(145deg, #fff7ed, #ffedd5);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  border-radius: var(--border-radius);
+  padding: 1.25rem;
+  margin-top: 1.25rem;
+  animation: slideIn 0.3s ease-out;
+  box-shadow: var(--shadow);
+  position: relative;
+  overflow: hidden;
+  transform-origin: top;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px) scaleY(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scaleY(1);
+  }
+}
+
+.date-events-preview::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(to right, var(--secondary-color), var(--secondary-light));
+}
+
+.events-icon {
+  color: var(--secondary-color);
+  margin-right: 0.5rem;
+}
+
+.events-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 1rem;
+}
+
+.event-item {
+  display: flex;
+  flex-direction: column;
+  padding: 0.75rem;
+  border-bottom: 1px solid rgba(245, 158, 11, 0.2);
+  transition: all var(--transition-fast);
+  border-radius: var(--border-radius-sm);
+}
+
+.event-item:last-child {
+  border-bottom: none;
+}
+
+.event-item:hover {
+  background-color: rgba(255, 255, 255, 0.6);
+  transform: translateX(5px);
+}
+
+.event-title {
+  font-weight: 600;
+  color: var(--text-color);
+  font-size: 0.95rem;
+}
+
+.event-location {
+  font-size: 0.875rem;
+  color: var(--text-light);
+  margin-top: 0.25rem;
+  display: flex;
+  align-items: center;
+}
+
+.selected-date-info {
+  margin-top: 1.5rem;
+  padding: 1.25rem;
+  background-color: var(--background-light);
+  border-radius: var(--border-radius);
+  border: 1px solid var(--border-color);
+  animation: fadeIn 0.4s ease-out;
+  box-shadow: var(--shadow-sm);
+}
+
+.selected-date-info h4 {
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--primary-color);
+}
+
+.selected-date-info p {
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+
+.date-status {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+  padding: 0.75rem;
+  border-radius: var(--border-radius-sm);
+  font-size: 0.875rem;
+  font-weight: 500;
+  animation: fadeIn 0.5s ease-out;
+}
+
+.date-status svg {
+  font-size: 1.125rem;
+}
+
+.date-status.available {
+  background-color: rgba(16, 185, 129, 0.1);
+  color: #047857;
+  border-left: 3px solid #047857;
+}
+
+.date-status.booked {
+  background-color: rgba(245, 158, 11, 0.1);
+  color: #b45309;
+  border-left: 3px solid #b45309;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .react-datepicker__day-name, 
+  .react-datepicker__day {
+    width: 2rem !important;
+    line-height: 2rem !important;
+  }
+  
+  .event-item {
+    padding: 0.5rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .calendar-legend {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .react-datepicker__day-name, 
+  .react-datepicker__day {
+    width: 1.75rem !important;
+    line-height: 1.75rem !important;
+    font-size: 0.875rem !important;
+  }
+}
+
+/* Dark mode styles for Calendar component */
+[data-theme="dark"] .calendar-wrapper {
+  color: var(--text-light);
+}
+
+[data-theme="dark"] .date-picker-container {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .custom-calendar {
+  background-color: rgba(15, 23, 42, 0.7) !important;
+}
+
+[data-theme="dark"] .react-datepicker {
+  background-color: rgba(15, 23, 42, 0.8) !important;
+  border-color: rgba(99, 102, 241, 0.2) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3) !important;
+}
+
+[data-theme="dark"] .react-datepicker__month-container {
+  background-color: rgba(15, 23, 42, 0.8) !important;
+}
+
+[data-theme="dark"] .react-datepicker__header {
+  background: linear-gradient(135deg, #4f46e5, #6366f1) !important;
+}
+
+[data-theme="dark"] .react-datepicker__day {
+  color: var(--text-light) !important;
+}
+
+[data-theme="dark"] .react-datepicker__day--outside-month {
+  color: rgba(148, 163, 184, 0.6) !important;
+}
+
+[data-theme="dark"] .react-datepicker__day--selected {
+  background: linear-gradient(135deg, #4f46e5, #6366f1) !important;
+  box-shadow: 0 4px 10px rgba(99, 102, 241, 0.5) !important;
+}
+
+[data-theme="dark"] .react-datepicker__day--keyboard-selected {
+  background-color: rgba(99, 102, 241, 0.2) !important;
+  color: #a78bfa !important;
+}
+
+[data-theme="dark"] .react-datepicker__day:hover:not(.react-datepicker__day--disabled):not(.react-datepicker__day--selected) {
+  background-color: rgba(99, 102, 241, 0.15) !important;
+}
+
+[data-theme="dark"] .calendar-day {
+  color: var(--text-light);
+}
+
+[data-theme="dark"] .booked-date {
+  color: #a78bfa !important;
+}
+
+[data-theme="dark"] .event-indicator {
+  background-color: #f97316;
+  box-shadow: 0 0 0 2px rgba(15, 23, 42, 0.8);
+}
+
+[data-theme="dark"] .calendar-info {
+  background-color: rgba(15, 23, 42, 0.7);
+  border-color: rgba(99, 102, 241, 0.2);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+}
+
+[data-theme="dark"] .calendar-legend {
+  color: var(--text-light);
+}
+
+[data-theme="dark"] .legend-color.available {
+  background: linear-gradient(135deg, #1e293b, #334155);
+  border-color: #4f46e5;
+}
+
+[data-theme="dark"] .legend-color.booked {
+  background: linear-gradient(135deg, #422006, #7c2d12);
+  border-color: #f97316;
+}
+
+[data-theme="dark"] .date-events-preview {
+  background: linear-gradient(145deg, #422006, #7c2d12);
+  border-color: rgba(249, 115, 22, 0.3);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+[data-theme="dark"] .date-events-preview::before {
+  background: linear-gradient(to right, #f97316, #fb923c);
+}
+
+[data-theme="dark"] .events-icon {
+  color: #fb923c;
+}
+
+[data-theme="dark"] .event-item {
+  border-bottom-color: rgba(249, 115, 22, 0.2);
+}
+
+[data-theme="dark"] .event-item:hover {
+  background-color: rgba(15, 23, 42, 0.5);
+}
+
+[data-theme="dark"] .event-title {
+  color: #f1f5f9;
+}
+
+[data-theme="dark"] .event-location {
+  color: #94a3b8;
+}
+
+[data-theme="dark"] .selected-date-info {
+  background-color: rgba(15, 23, 42, 0.7);
+  border-color: rgba(99, 102, 241, 0.2);
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.15);
+}
+
+[data-theme="dark"] .selected-date-info h4 {
+  color: #a78bfa;
+}
+
+[data-theme="dark"] .selected-date-info p {
+  color: #f1f5f9;
+}
+
+[data-theme="dark"] .date-status.available {
+  background-color: rgba(16, 185, 129, 0.1);
+  color: #10b981;
+}
+
+[data-theme="dark"] .date-status.booked {
+  background-color: rgba(249, 115, 22, 0.1);
+  color: #fb923c;
+}
+
+[data-theme="dark"] .react-datepicker__current-month {
+  color: white !important;
+  font-weight: 600 !important;
+  font-size: 1.125rem !important;
+  margin-bottom: 1rem !important;
+}
+
+[data-theme="dark"] .react-datepicker__navigation-icon::before {
+  border-color: white !important;
+}
+
+[data-theme="dark"] .react-datepicker__navigation:hover .react-datepicker__navigation-icon::before {
+  border-color: rgba(255, 255, 255, 0.8) !important;
+}
+
+/* Override the border radius for better appearance */
+[data-theme="dark"] .react-datepicker__header {
+  border-top-left-radius: 12px !important;
+  border-top-right-radius: 12px !important;
+}
+
+[data-theme="dark"] .calendar-info {
+  margin-top: 1rem;
+  padding: 1rem;
+  background-color: #1e293b;
+  border: 1px solid rgba(99, 102, 241, 0.15);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Fix for calendar size in dark mode */
+[data-theme="dark"] .date-picker-container {
+  width: 100%;
+  max-width: 100%;
+}
+
+[data-theme="dark"] .react-datepicker {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+/* Fix for date selection appearance */
+[data-theme="dark"] .calendar-day {
+  transition: all 0.2s ease;
+}
+
+[data-theme="dark"] .react-datepicker__day:hover:not(.react-datepicker__day--disabled):not(.react-datepicker__day--selected) {
+  background-color: rgba(99, 102, 241, 0.2) !important;
+  border-radius: 50% !important;
+}
+
+[data-theme="dark"] .calendar-wrapper {
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* Fix for legend box styling */
+[data-theme="dark"] .calendar-legend {
+  margin-bottom: 1rem;
+  display: flex;
+  gap: 1rem;
+  background-color: rgba(30, 41, 59, 0.5);
+  padding: 0.75rem;
+  border-radius: 6px;
+  border: 1px solid rgba(99, 102, 241, 0.1);
+}
+
+/* Add visual indicator for today's date */
+[data-theme="dark"] .react-datepicker__day--today {
+  font-weight: bold !important;
+  border: 1px solid rgba(99, 102, 241, 0.5) !important;
+}
+
+/* For highlighted number 12 as shown in the image */
+[data-theme="dark"] .react-datepicker__day--selected,
+[data-theme="dark"] .react-datepicker__day--keyboard-selected {
+  background: #6366f1 !important;
+  color: white !important;
+  font-weight: 600 !important;
+  transform: scale(1.1) !important;
+} 
